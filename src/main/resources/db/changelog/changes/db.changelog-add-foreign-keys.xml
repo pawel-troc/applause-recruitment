@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="Bug - add tester foreign key" author="Pawel Troc">
+        <addForeignKeyConstraint
+                baseTableName="Bug"
+                baseColumnNames="tester_id"
+                constraintName="FK_Bug_Tester"
+                referencedTableName="Tester"
+                referencedColumnNames="id"
+        />
+    </changeSet>
+
+    <changeSet id="Bug - add device foreign key" author="Pawel Troc">
+        <addForeignKeyConstraint
+                baseTableName="Bug"
+                baseColumnNames="device_id"
+                constraintName="FK_Bug_Device"
+                referencedTableName="Device"
+                referencedColumnNames="id"
+        />
+    </changeSet>
+
+    <changeSet id="Tester_Device - add tester foreign key" author="Pawel Troc">
+        <addForeignKeyConstraint
+                baseTableName="Tester_Device"
+                baseColumnNames="tester_id"
+                constraintName="FK_Tester_Device_Tester"
+                referencedTableName="Tester"
+                referencedColumnNames="id"
+        />
+    </changeSet>
+
+    <changeSet id="Tester_Device - add device foreign key" author="Pawel Troc">
+        <addForeignKeyConstraint
+                baseTableName="Tester_Device"
+                baseColumnNames="device_id"
+                constraintName="FK_Tester_Device_Device"
+                referencedTableName="Device"
+                referencedColumnNames="id"
+        />
+    </changeSet>
+
+</databaseChangeLog>

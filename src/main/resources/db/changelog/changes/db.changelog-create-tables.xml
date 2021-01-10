@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="Bug - create table" author="Pawel Troc">
+        <createTable tableName="Bug">
+            <column name="id" type="int">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="device_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="tester_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="Tester - create table" author="Pawel Troc">
+        <createTable tableName="Tester">
+            <column name="id" type="int">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="first_name" type="varchar(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_name" type="varchar(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="country" type="varchar(2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_login" type="smalldatetime"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="Device - create table" author="Pawel Troc">
+        <createTable tableName="Device">
+            <column name="id" type="int">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="description" type="varchar(128)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="Tester_Device - create table" author="Pawel Troc">
+        <createTable tableName="Tester_Device">
+            <column name="tester_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="device_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

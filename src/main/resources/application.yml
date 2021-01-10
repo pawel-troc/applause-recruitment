@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: "applause-recruitment"
+  liquibase:
+    changeLog: "classpath:db/changelog/db.changelog-master.xml"
+  h2:
+    console:
+      enabled: true
+      path: "/h2console"
+  datasource:
+    url: "jdbc:h2:mem:applauserecruitment;"
+    driver-class-name: "org.h2.Driver"
