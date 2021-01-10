@@ -32,6 +32,9 @@
             <column header="lastLogin"
                     name="last_login"
                     />
+            <column header="country"
+                    name="country_code"
+                    />
         </loadData>
     </changeSet>
 
