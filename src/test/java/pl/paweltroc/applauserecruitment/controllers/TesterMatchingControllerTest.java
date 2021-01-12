@@ -52,7 +52,7 @@ public class TesterMatchingControllerTest {
                 .thenReturn(testers);
 
         // when
-        mockMvc.perform(get("/testers?devices=1,2&countryCodes=UK,PL"))
+        mockMvc.perform(get("/testers?deviceIds=1,2&countryCodes=UK,PL"))
 
                 // then
                 .andExpect(status().isOk())
@@ -66,7 +66,7 @@ public class TesterMatchingControllerTest {
                 .thenReturn(emptyList());
 
         // when
-        mockMvc.perform(get("/testers?devices=1,2&countryCodes=UK,PL"))
+        mockMvc.perform(get("/testers?deviceIds=1,2&countryCodes=UK,PL"))
 
                 // then
                 .andExpect(status().isOk())
@@ -85,7 +85,7 @@ public class TesterMatchingControllerTest {
     @Test
     void shouldReturn400WhenCountryCodesParamMissing() throws Exception {
         // when
-        mockMvc.perform(get("/testers?devices=1"))
+        mockMvc.perform(get("/testers?deviceIds=1"))
 
                 // then
                 .andExpect(MockMvcResultMatchers.status().isBadRequest());
@@ -98,7 +98,7 @@ public class TesterMatchingControllerTest {
                 .thenThrow(InvalidCountryCodeException.class);
 
         // when
-        mockMvc.perform(get("/testers?devices=1&countryCodes=abc"))
+        mockMvc.perform(get("/testers?deviceIds=1&countryCodes=abc"))
                 .andExpect(status().isBadRequest());
     }
 }

@@ -17,7 +17,7 @@ public class TesterMatchingController {
 
     @GetMapping("testers")
     public List<MatchedTesterDto> matchTestersByDevicesAndCountryCodes(
-            @RequestParam("devices") List<Integer> deviceIds,
+            @RequestParam("deviceIds") List<Integer> deviceIds,
             @RequestParam("countryCodes") List<String> countryCodes
     ) {
         return testerMatchingService.matchTestersByDeviceIdsAndCountryCodes(deviceIds, countryCodes);
