@@ -1,4 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {TesterMatchingService} from '../../services/tester-matching.service';
+import {MatchedTester} from '../../model/MatchedTester';
+import {Device} from '../../model/Device';
+import {CountryCodeService} from '../../services/country-code.service';
+import {DeviceService} from '../../services/device.service';
+import {forkJoin} from 'rxjs';
+import {IDropdownSettings} from 'ng-multiselect-dropdown';
+
+interface CountryCode {
+  code: string;
+}
 
 @Component({
   selector: 'app-tester-matching-search',
@@ -7,9 +19,64 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TesterMatchingSearchComponent implements OnInit {
 
-  constructor() { }
+  @Output()
+  public searchPerformed: EventEmitter<MatchedTester[]> = new EventEmitter<MatchedTester[]>();
 
-  ngOnInit() {
+  private devices: Device[] = [];
+  // private devices: Device[] = [{id: 1, description: 'iphone'}, {description: 'xiaomi', id: 2}];
+  private countryCodes: CountryCode[] = [];
+  private form: FormGroup;
+
+  public countryCodeDropdownSettings: IDropdownSettings = {
+    singleSelection: false,
+    idField: 'code',
+    textField: 'code',
+    selectAllText: 'Select All',
+    unSelectAllText: 'Deselect All',
+  };
+
+  public deviceDropdownSettings: IDropdownSettings = {
+    singleSelection: false,
+    idField: 'id',
+    textField: 'description',
+    selectAllText: 'Select All',
+    unSelectAllText: 'Deselect All',
+  };
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private testerMatchingService: TesterMatchingService,
+    private countryCodeService: CountryCodeService,
+    private deviceService: DeviceService) {
   }
 
+  ngOnInit() {
+    forkJoin(
+      this.countryCodeService.getCountryCodes(),
+      this.deviceService.getDevices(),
+    ).subscribe(([countryCodes, devices]) => {
+      this.devices = devices;
+      this.countryCodes = countryCodes.map((countryCode) => ({code: countryCode}));
+    }, (error) => {
+      console.error(error);
+    });
+
+    this.form = this.formBuilder.group({
+      countryCodes: [null, Validators.required],
+      deviceIds: [null, Validators.required],
+    });
+  }
+
+  public submitSearch() {
+    if (this.form.valid) {
+      this.testerMatchingService.matchTesters(
+        this.form.get('countryCodes').value.map((countryCode: CountryCode) => countryCode.code),
+        this.form.get('deviceIds').value.map((device) => device.id),
+      ).subscribe(
+        (matchedTesters) => this.searchPerformed.emit(matchedTesters),
+        (error) => {
+          console.error(error);
+        });
+    }
+  }
 }

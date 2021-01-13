@@ -1,1 +1,36 @@
-<p>tester-matching-search works!</p>
+<form [formGroup]="form">
+  <div class="col-12">
+    <label class="col-form-label">
+      Country codes
+    </label>
+    <ng-multiselect-dropdown
+      class="bg-white"
+      [placeholder]="'Select country codes'"
+      [data]="countryCodes"
+      formControlName="countryCodes"
+      [settings]="countryCodeDropdownSettings"
+    >
+    </ng-multiselect-dropdown>
+  </div>
+  <div class="col-12 mt-3">
+    <label class="col-form-label">
+      Devices
+    </label>
+    <ng-multiselect-dropdown
+      class="bg-white"
+      [placeholder]="'Select devices'"
+      [data]="devices"
+      formControlName="deviceIds"
+      [settings]="deviceDropdownSettings"
+    >
+    </ng-multiselect-dropdown>
+  </div>
+
+  <div class="col-12 mt-3">
+    <button class="w-100 btn btn-primary btn-lg"
+            (click)="submitSearch()"
+            [disabled]="!form.valid">
+      Search
+    </button>
+  </div>
+</form>

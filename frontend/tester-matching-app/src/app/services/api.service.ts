@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 
 @Injectable({
@@ -7,14 +7,22 @@ import {Observable} from 'rxjs';
 })
 export class ApiService {
 
-  private apiBaseUrl = 'localhost:8080';
+  private apiBaseUrl = 'http://localhost:8080';
 
   constructor(private httpClient: HttpClient) {
   }
 
-  public get<T>(endpoint: string, queryParams?: { [param: string]: string | string[] }): Observable<T> {
+  public get<T>(endpoint: string, queryParams?: any): Observable<T> {
+    let requestParams = new HttpParams();
+
+    // TODO forin
+    // tslint:disable-next-line:forin
+    for (const k in queryParams) {
+      requestParams = requestParams.set(k, queryParams[k]);
+    }
+
     return this.httpClient.get<T>(`${this.apiBaseUrl}/${endpoint}`, {
-      params: queryParams,
+      params: requestParams,
       responseType: 'json'
     });
   }

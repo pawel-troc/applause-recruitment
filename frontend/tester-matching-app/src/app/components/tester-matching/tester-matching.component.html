@@ -1,2 +1,10 @@
-<app-tester-matching-search></app-tester-matching-search>
-<app-tester-matching-result></app-tester-matching-result>
+<div class="container">
+  <div class="pt-4 text-center">
+    <p class="lead">
+      This app was made for recruitment process in Applause. It fetches data regarding testers based on
+      filtering criteria (Country codes and devices).
+    </p>
+  </div>
+  <app-tester-matching-search (searchPerformed)="setSearchResult($event)"></app-tester-matching-search>
+  <app-tester-matching-result-list [matchedTesters]="searchResult"></app-tester-matching-result-list>
+</div>

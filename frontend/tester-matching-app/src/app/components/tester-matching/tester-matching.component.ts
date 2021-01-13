@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {MatchedTester} from '../../model/MatchedTester';
 
 @Component({
   selector: 'app-tester-matching',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TesterMatchingComponent implements OnInit {
 
-  constructor() { }
+  public searchResult: MatchedTester[];
+
+  constructor() {
+  }
 
   ngOnInit(): void {
   }
 
+  public setSearchResult($event: MatchedTester[]): void {
+    this.searchResult = $event;
+  }
 }

@@ -9,7 +9,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MockMvcBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import pl.paweltroc.applauserecruitment.services.CountryCodeService;
@@ -40,7 +39,7 @@ class CountryCodeControllerTest {
         Mockito.when(countryCodeService.getAllCountryCodes()).thenReturn(asList("UK", "PL"));
 
         // when
-        mockMvc.perform(MockMvcRequestBuilders.get("/countries"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/countryCodes"))
 
                 // then
                 .andExpect(status().isOk())
