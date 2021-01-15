@@ -1,10 +1,11 @@
-<form [formGroup]="form">
+<form [formGroup]="form" class="search-form">
   <div class="col-12">
-    <label class="col-form-label">
+    <label class="search-form__label">
       Country codes
     </label>
     <ng-multiselect-dropdown
-      class="bg-white"
+      name="countryCodes"
+      class="search-form__dropdown"
       [placeholder]="'Select country codes'"
       [data]="countryCodes"
       formControlName="countryCodes"
@@ -13,21 +14,22 @@
     </ng-multiselect-dropdown>
   </div>
   <div class="col-12 mt-3">
-    <label class="col-form-label">
+    <label class="search_form__label">
       Devices
     </label>
     <ng-multiselect-dropdown
-      class="bg-white"
+      name="devices"
+      class="search-form__dropdown"
       [placeholder]="'Select devices'"
       [data]="devices"
-      formControlName="deviceIds"
+      formControlName="devices"
       [settings]="deviceDropdownSettings"
     >
     </ng-multiselect-dropdown>
   </div>
 
   <div class="col-12 mt-3">
-    <button class="w-100 btn btn-primary btn-lg"
+    <button class="search-form__button w-100 btn btn-primary btn-lg"
             (click)="submitSearch()"
             [disabled]="!form.valid">
       Search

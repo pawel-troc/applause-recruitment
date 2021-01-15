@@ -1,7 +1,7 @@
-<div *ngIf="matchedTesters" class="py-4 col-12">
-  <h2>Testers found</h2>
+<div *ngIf="matchedTesters" class="testers-result-list py-4 col-12">
+  <h2 class="testers-result-list__header">Testers found</h2>
   <ng-container [ngSwitch]="matchedTesters.length === 0">
-    <p *ngSwitchCase="true">No testers found for specified criteria</p>
+    <p *ngSwitchCase="true" class="testers-result-list__no-results">No testers found for specified criteria</p>
     <ng-container *ngSwitchCase="false">
       <app-tester-matching-result-item *ngFor="let tester of matchedTesters" [matchedTester]="tester">
       </app-tester-matching-result-item>

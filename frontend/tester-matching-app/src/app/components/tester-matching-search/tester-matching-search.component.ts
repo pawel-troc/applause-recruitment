@@ -8,7 +8,7 @@ import {DeviceService} from '../../services/device.service';
 import {forkJoin} from 'rxjs';
 import {IDropdownSettings} from 'ng-multiselect-dropdown';
 
-interface CountryCode {
+export interface CountryCode {
   code: string;
 }
 
@@ -22,10 +22,9 @@ export class TesterMatchingSearchComponent implements OnInit {
   @Output()
   public searchPerformed: EventEmitter<MatchedTester[]> = new EventEmitter<MatchedTester[]>();
 
-  private devices: Device[] = [];
-  // private devices: Device[] = [{id: 1, description: 'iphone'}, {description: 'xiaomi', id: 2}];
-  private countryCodes: CountryCode[] = [];
-  private form: FormGroup;
+  public devices: Device[] = [];
+  public countryCodes: CountryCode[] = [];
+  public form: FormGroup;
 
   public countryCodeDropdownSettings: IDropdownSettings = {
     singleSelection: false,
@@ -63,15 +62,15 @@ export class TesterMatchingSearchComponent implements OnInit {
 
     this.form = this.formBuilder.group({
       countryCodes: [null, Validators.required],
-      deviceIds: [null, Validators.required],
+      devices: [null, Validators.required],
     });
   }
 
-  public submitSearch() {
+  public submitSearch(): void {
     if (this.form.valid) {
       this.testerMatchingService.matchTesters(
         this.form.get('countryCodes').value.map((countryCode: CountryCode) => countryCode.code),
-        this.form.get('deviceIds').value.map((device) => device.id),
+        this.form.get('devices').value.map((device) => device.id),
       ).subscribe(
         (matchedTesters) => this.searchPerformed.emit(matchedTesters),
         (error) => {

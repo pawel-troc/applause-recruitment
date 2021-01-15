@@ -6,3 +6,9 @@ services:
       dockerfile: Dockerfile.api
     ports:
       - "8080:8080"
+  client:
+    build:
+      context: ./frontend/tester-matching-app
+      dockerfile: Dockerfile.client
+    ports:
+      - "4200:80"

@@ -1,6 +1,6 @@
-<div class="card mb-1">
+<div *ngIf="matchedTester" class="tester-card card mb-1">
   <div class="card-body">
-    <div>{{ matchedTester.firstName }} {{ matchedTester.lastName }}</div>
-    <div>Amount of bugs found: {{ matchedTester.foundBugsQuantity }}</div>
+    <div class="tester-card__name">{{ matchedTester.firstName }} {{ matchedTester.lastName }}</div>
+    <div class="tester-card__bugs">Amount of bugs found: {{ matchedTester.foundBugsQuantity }}</div>
   </div>
 </div>

@@ -7,7 +7,7 @@ import {Observable} from 'rxjs';
 })
 export class ApiService {
 
-  private apiBaseUrl = 'http://localhost:8080';
+  public apiBaseUrl = 'http://localhost:8080';
 
   constructor(private httpClient: HttpClient) {
   }
@@ -15,10 +15,10 @@ export class ApiService {
   public get<T>(endpoint: string, queryParams?: any): Observable<T> {
     let requestParams = new HttpParams();
 
-    // TODO forin
-    // tslint:disable-next-line:forin
-    for (const k in queryParams) {
-      requestParams = requestParams.set(k, queryParams[k]);
+    for (const key in queryParams) {
+      if (queryParams.hasOwnProperty(key)) {
+        requestParams = requestParams.set(key, queryParams[key]);
+      }
     }
 
     return this.httpClient.get<T>(`${this.apiBaseUrl}/${endpoint}`, {

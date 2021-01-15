@@ -3,8 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 import {TesterMatchingComponent} from './components/tester-matching/tester-matching.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'tester-matching', pathMatch: 'full' },
   { path: 'tester-matching', component: TesterMatchingComponent },
+  { path: '', redirectTo: '/tester-matching', pathMatch: 'full' },
 ];
 
 @NgModule({
